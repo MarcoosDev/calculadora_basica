@@ -2,20 +2,19 @@
 #include <stdlib.h>
 
 float menu(int m, float a, float b, int *erro);
-int metodo_de_calculo();
-float ler_numero();
+float perguntar(char *texto);
 float dividir(int *erro, float a, float b);
 
 int main() {
-    float pri, seg, resultado;
-    int m, erro = 1;
+    float pri, seg, resultado ;
+    int  metodo, erro = 1;
 
-    pri = ler_numero();
-    seg = ler_numero();
+    pri = perguntar("Qual o primeiro numero?\n");
+    seg = perguntar("Qual o segundo numero?\n");
 
     while (erro == 1) {
-        m = metodo_de_calculo();
-        resultado = menu(m, pri, seg, &erro);
+        metodo = perguntar_metodo("qual o metodo?\n1-Soma\n2-Subtracao\n3-Divisao\n4-Multiplicacao\n");
+        resultado = menu(metodo, pri, seg, &erro);
     }
     if (erro == 2) {
         printf("Resultado: Erro de calculo, divisoes por 0 sao matematicamente impossiveis.");
@@ -29,7 +28,7 @@ int main() {
 float menu(int m, float a, float b, int *erro) {
     float r = 0;
     *erro = 0;
-
+    
     switch (m) {
         case 1: r = a + b; break;
         case 2: r = a - b; break;
@@ -51,16 +50,16 @@ float dividir(int *erro, float a, float b){
     return a / b;
 }
 
-int metodo_de_calculo() {
-    int res;
-    printf("qual o metodo?\n1-Soma\n2-Subtracao\n3-Divisao\n4-Multiplicacao\n");
-    scanf("%d", &res);
-    return res;
-};
-
-float ler_numero() {
+float perguntar(char *texto) {
     float num;
-    printf("me diga um numero\n");
+    printf(texto);
     scanf("%f", &num);
     return num;
 };
+
+int perguntar_metodo(char *texto) {
+    int m;
+    printf("%s", texto);
+    scanf("%d", &m);
+    return m;
+}
