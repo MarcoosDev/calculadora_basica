@@ -8,13 +8,10 @@ float dividir(int *erro, float a, float b);
 
 int main() {
     float pri, seg, resultado;
-    int m, erro = 0;
+    int m, erro = 1;
 
     pri = ler_numero();
     seg = ler_numero();
-    m = metodo_de_calculo();
-
-    resultado = menu(m, pri, seg, &erro);
 
     while (erro == 1) {
         m = metodo_de_calculo();
@@ -28,15 +25,6 @@ int main() {
     printf("Resultado: %.2f", resultado);
     return 0;
 };
-
-float dividir(int *erro, float a, float b){
-    if (b == 0) {
-        printf("Erro de calculo, fator b = 0.\n");
-        *erro = 2;
-        return 0;
-    }
-    return a / b;
-}
 
 float menu(int m, float a, float b, int *erro) {
     float r = 0;
@@ -53,6 +41,15 @@ float menu(int m, float a, float b, int *erro) {
     }
     return r;
 };
+
+float dividir(int *erro, float a, float b){
+    if (b == 0) {
+        printf("Erro de calculo, fator b = 0.\n");
+        *erro = 2;
+        return 0;
+    }
+    return a / b;
+}
 
 int metodo_de_calculo() {
     int res;
